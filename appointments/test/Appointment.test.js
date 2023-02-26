@@ -26,3 +26,21 @@ describe("Appointements", () => {
     expect(document.body.textContent).toMatch("Jordan");
   });
 });
+
+describe("AppointementsDayView", () => {
+  let container;
+  let customer;
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.replaceChildren(container);
+  });
+
+  const render = (component) =>
+    act(() => ReactDOM.createRoot(container).render(component));
+
+  it("renders a div with right id", () => {
+    customer = { firstName: "Ashley" };
+    render(<AppointmentsDayView appointments={[]} />);
+    expect(container.querySelector("div#appointments-day-view")).not.toBeNull();
+  });
+});
