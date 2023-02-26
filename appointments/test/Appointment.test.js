@@ -5,7 +5,7 @@ import { Appointment } from "../src/Appointment";
 //jest use jsdom a headless implementation of the DOM
 describe("Appointements", () => {
   let container;
-
+  let customer;
   beforeEach(() => {
     container = document.createElement("div");
     document.body.replaceChildren(container);
@@ -14,14 +14,14 @@ describe("Appointements", () => {
     act(() => ReactDOM.createRoot(container).render(component));
 
   it("render the customer first name", () => {
-    const customer = { firstName: "Ashley" };
+    customer = { firstName: "Ashley" };
     render(<Appointment customer={customer} />);
 
     expect(document.body.textContent).toMatch("Ashley");
   });
 
   it("renders another customer first name", () => {
-    const customer = { firstName: "Jordan" };
+    customer = { firstName: "Jordan" };
     render(<Appointment customer={customer} />);
     expect(document.body.textContent).toMatch("Jordan");
   });
