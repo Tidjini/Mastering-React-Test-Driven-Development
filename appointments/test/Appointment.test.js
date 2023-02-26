@@ -1,15 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
+import { act } from "react-dom/test-utils";
 import { Appointment } from "../src/Appointment";
 //jest use jsdom a headless implementation of the DOM
 describe("Appointements", () => {
+  let container;
+
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.replaceChildren(container);
+  });
+  const render = (component) =>
+    act(() => ReactDOM.createRoot(container).render(component));
+
   it("render the customer first name", () => {
     const customer = { firstName: "Ashley" };
-    const component = <Appointment customer={customer} />;
-    const container = document.createElement("div");
-    document.body.appendChild(container);
-
-    ReactDOM.render(component, container);
+    render(<Appointment />);
 
     expect(document.body.textContent).toMatch("Ashley");
   });
