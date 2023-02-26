@@ -1,1 +1,3 @@
-describe("Appointements", () => {});
+describe("Appointements", () => {
+  it("render the customer first name", () => {});
+});
