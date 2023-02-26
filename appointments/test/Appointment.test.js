@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Appointment } from "../src";
 //jest use jsdom a headless implementation of the DOM
 describe("Appointements", () => {
   it("render the customer first name", () => {
