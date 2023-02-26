@@ -10,13 +10,13 @@ describe("Appointements", () => {
     container = document.createElement("div");
     document.body.replaceChildren(container);
   });
+
   const render = (component) =>
     act(() => ReactDOM.createRoot(container).render(component));
 
   it("render the customer first name", () => {
     customer = { firstName: "Ashley" };
     render(<Appointment customer={customer} />);
-
     expect(document.body.textContent).toMatch("Ashley");
   });
 
