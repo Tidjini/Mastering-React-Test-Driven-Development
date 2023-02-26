@@ -39,8 +39,18 @@ describe("AppointementsDayView", () => {
     act(() => ReactDOM.createRoot(container).render(component));
 
   it("renders a div with right id", () => {
-    customer = { firstName: "Ashley" };
     render(<AppointmentsDayView appointments={[]} />);
     expect(container.querySelector("div#appointments-day-view")).not.toBeNull();
+  });
+
+  it("renders multiple appointments in an ol element", () => {
+    const today = new Date();
+    const appointments = [
+      { startAt: today.setHours(12, 0) },
+      { startAt: today.setHours(13, 0) },
+    ];
+    render(<AppointmentsDayView appointments={appointments} />);
+    expect(container.querySelector("ol")).not.toBeNull();
+    expect(container.querySelector("ol").children).toHaveLength(2);
   });
 });
