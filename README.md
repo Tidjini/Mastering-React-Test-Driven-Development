@@ -15,3 +15,11 @@
     }
 
     <Appointment customer={customer}>
+
+# Test:
+
+    npm test
+
+# Build:
+
+    npm run build
