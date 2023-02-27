@@ -7,12 +7,19 @@ const appointmentTimeOfDay = (startAt) => {
 export const Appointment = ({ customer }) => <div>{customer.firstName}</div>;
 
 export const AppointmentsDayView = ({ appointments }) => {
+  const [appointment, setAppointment] = React.useState(0);
+
   return (
     <div id="appointments-day-view">
       <ol>
         {appointments.map((appointment, index) => (
           <li key={index}>
-            <button type="button">
+            <button
+              type="button"
+              onClick={() => {
+                setAppointment(index);
+              }}
+            >
               {appointmentTimeOfDay(appointment.startAt)}
             </button>
           </li>
@@ -21,7 +28,7 @@ export const AppointmentsDayView = ({ appointments }) => {
       {appointments.length === 0 ? (
         <p>There are no appointments scheduled for today.</p>
       ) : (
-        <Appointment {...appointments[0]} />
+        <Appointment {...appointments[appointment]} />
       )}
     </div>
   );

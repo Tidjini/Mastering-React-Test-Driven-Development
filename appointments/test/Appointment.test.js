@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { act } from "react-dom/test-utils";
+import ReactTestUtils, { act } from "react-dom/test-utils";
 import { Appointment, AppointmentsDayView } from "../src/Appointment";
 //jest use jsdom a headless implementation of the DOM
 describe("Appointements", () => {
@@ -76,5 +76,13 @@ describe("AppointementsDayView", () => {
     render(<AppointmentsDayView appointments={appointments} />);
     expect(container.querySelectorAll("li > button")).toHaveLength(2);
     expect(container.querySelectorAll("li > button")[0].type).toEqual("button");
+  });
+  it("render another appointment when selected", () => {
+    render(<AppointmentsDayView appointments={appointments} />);
+    const button = container.querySelectorAll("li > button")[1];
+    expect(button.textContent).toEqual("13:00");
+
+    act(() => ReactTestUtils.Simulate.click(button));
+    expect(container.textContent).toMatch("Jordan");
   });
 });
