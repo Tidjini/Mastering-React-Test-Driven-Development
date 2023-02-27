@@ -4,9 +4,10 @@ const appointmentTimeOfDay = (startAt) => {
   const [h, m] = new Date(startAt).toTimeString().split(":");
   return `${h}:${m}`;
 };
-export const Appointment = ({ customer }) => {
+export const Appointment = ({ customer, startAt }) => {
   return (
     <div>
+      <h3>Today's Appointment at {appointmentTimeOfDay(startAt)}</h3>
       <table>
         <tbody>
           <tr>
