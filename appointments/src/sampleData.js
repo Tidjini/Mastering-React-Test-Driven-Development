@@ -3,7 +3,17 @@ const today = new Date();
 const at = (hours) => today.setHours(hours, 0);
 
 export const sampleAppointments = [
-  { startAt: at(9), customer: { firstName: "Charlie" } },
+  {
+    startAt: at(9),
+    customer: {
+      firstName: "Charlie",
+      lastName: "Jones",
+      phoneNumber: "(132) 555-0123",
+    },
+    stylist: "Jay Speares",
+    service: "Cut",
+    notes: "",
+  },
   { startAt: at(10), customer: { firstName: "Frankie" } },
   { startAt: at(11), customer: { firstName: "Casey" } },
   { startAt: at(12), customer: { firstName: "Ashley" } },

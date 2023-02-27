@@ -9,7 +9,7 @@
             "phoneNumber" : "(132) 555-0123"
         },
         "stylist":"Jay Speares",
-        "service":"Cut,
+        "service":"Cut",
         "startsAt" :"20023-02-26 09:30",
         "notes": ""
     }
