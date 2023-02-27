@@ -9,14 +9,16 @@ export const Appointment = ({ customer }) => <div>{customer.firstName}</div>;
 export const AppointmentsDayView = ({ appointments }) => {
   return (
     <div id="appointments-day-view">
-      {appointments && (
-        <ol>
-          {appointments.map((appointment, index) => (
-            <li key={index}>{appointmentTimeOfDay(appointment.startAt)}</li>
-          ))}
-        </ol>
+      <ol>
+        {appointments.map((appointment, index) => (
+          <li key={index}>{appointmentTimeOfDay(appointment.startAt)}</li>
+        ))}
+      </ol>
+      {appointments.length === 0 ? (
+        <p>There are no appointments scheduled for today.</p>
+      ) : (
+        <Appointment {...appointments[0]} />
       )}
-      <p>There are no appointments scheduled for today.</p>
     </div>
   );
 };

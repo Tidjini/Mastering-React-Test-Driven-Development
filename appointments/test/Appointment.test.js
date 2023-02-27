@@ -29,7 +29,12 @@ describe("Appointements", () => {
 
 describe("AppointementsDayView", () => {
   let container;
-  let customer;
+  const today = new Date();
+
+  const appointments = [
+    { startAt: today.setHours(12, 0), customer: { firstName: "Ashley" } },
+    { startAt: today.setHours(13, 0), customer: { firstName: "Jordan" } },
+  ];
   beforeEach(() => {
     container = document.createElement("div");
     document.body.replaceChildren(container);
@@ -44,11 +49,6 @@ describe("AppointementsDayView", () => {
   });
 
   it("renders multiple appointments in an ol element", () => {
-    const today = new Date();
-    const appointments = [
-      { startAt: today.setHours(12, 0) },
-      { startAt: today.setHours(13, 0) },
-    ];
     render(<AppointmentsDayView appointments={appointments} />);
     expect(container.querySelector("ol")).not.toBeNull();
     expect(container.querySelector("ol").children).toHaveLength(2);
@@ -61,14 +61,14 @@ describe("AppointementsDayView", () => {
   });
 
   it("renders each appointment in an li", () => {
-    const today = new Date();
-    const appointments = [
-      { startAt: today.setHours(12, 0) },
-      { startAt: today.setHours(13, 0) },
-    ];
     render(<AppointmentsDayView appointments={appointments} />);
     expect(container.querySelectorAll("li")).toHaveLength(2);
     expect(container.querySelectorAll("li")[0].textContent).toEqual("12:00");
     expect(container.querySelectorAll("li")[1].textContent).toEqual("13:00");
+  });
+
+  it("select the first appointments by default", () => {
+    render(<AppointmentsDayView appointments={appointments} />);
+    expect(container.textContent).toMatch("Ashley");
   });
 });
