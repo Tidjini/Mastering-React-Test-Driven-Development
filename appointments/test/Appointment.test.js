@@ -53,6 +53,12 @@ describe("AppointementsDayView", () => {
     expect(container.querySelector("ol")).not.toBeNull();
     expect(container.querySelector("ol").children).toHaveLength(2);
   });
+  it("intially shows a message saying there are no appointments today", () => {
+    render(<AppointmentsDayView appointments={[]} />);
+    expect(container.textContent).toMatch(
+      "There are no appointments scheduled for today."
+    );
+  });
 
   it("renders each appointment in an li", () => {
     const today = new Date();
