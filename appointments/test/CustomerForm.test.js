@@ -8,4 +8,9 @@ describe("CustomerForm", () => {
   beforeEach(() => {
     ({ render, container } = createContainer());
   });
+
+  it("renders a form", () => {
+    render(<CustomerForm />);
+    expect(container.querySelector('form[id="customer"]')).not.toBeNull();
+  });
 });
