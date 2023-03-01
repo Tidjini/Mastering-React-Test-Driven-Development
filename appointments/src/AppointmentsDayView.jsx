@@ -4,7 +4,7 @@ const appointmentTimeOfDay = (startAt) => {
   const [h, m] = new Date(startAt).toTimeString().split(":");
   return `${h}:${m}`;
 };
-export const Appointment = ({ customer, startAt }) => {
+export const Appointment = ({ customer, startAt, stylist, service, notes }) => {
   return (
     <div>
       <h3>Today's Appointment at {appointmentTimeOfDay(startAt)}</h3>
@@ -12,23 +12,23 @@ export const Appointment = ({ customer, startAt }) => {
         <tbody>
           <tr>
             <td>Customer</td>
-            <td>{customer.firstName}</td>
+            <td>{`${customer.firstName} ${customer.lastName}`}</td>
           </tr>
           <tr>
             <td>Phone number</td>
-            <td></td>
+            <td>{customer.phoneNumber}</td>
           </tr>
           <tr>
             <td>Stylist</td>
-            <td></td>
+            <td>{stylist}</td>
           </tr>
           <tr>
             <td>Service</td>
-            <td></td>
+            <td>{service}</td>
           </tr>
           <tr>
             <td>Notes</td>
-            <td></td>
+            <td>{notes}</td>
           </tr>
         </tbody>
       </table>
