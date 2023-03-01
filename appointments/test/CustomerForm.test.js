@@ -62,12 +62,12 @@ describe("CustomerForm", () => {
         onSubmit={({ firstName }) => expect(firstName).toEqual("Jamie")}
       />
     );
-
-    await act(async () =>
-      ReactTestUtils.Simulate.change(field("customer", "firstName"), {
-        target: { value: "Jamie" },
-      })
-    );
+    const firstName = field("customer", "firstName");
+    await act(async () => {
+      ReactTestUtils.Simulate.change(firstName, {
+        target: { value: "Jamie", name: "firstName" },
+      });
+    });
     await act(async () => ReactTestUtils.Simulate.submit(form("customer")));
   });
 });
