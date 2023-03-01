@@ -27,12 +27,15 @@ describe("CustomerForm", () => {
 
   it("includes the existing value for the first name", () => {
     render(<CustomerForm firstName="Ashley" />);
-    const firstNameField = field("customer", "firstName");
-    expect(firstNameField.value).toEqual("Ashley");
+    expect(field("customer", "firstName").value).toEqual("Ashley");
   });
   it("renders label for the first name", () => {
     render(<CustomerForm />);
     expect(labelFor("firstName")).not.toBeNull();
     expect(labelFor("firstName").textContent).toEqual("First name");
+  });
+  it("assign an id that matches the label id to the first name field", () => {
+    render(<CustomerForm />);
+    expect(field("customer", "firstName").id).toEqual("firstName");
   });
 });
