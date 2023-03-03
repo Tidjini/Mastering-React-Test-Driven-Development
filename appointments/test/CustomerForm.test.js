@@ -44,34 +44,34 @@ describe("CustomerForm", () => {
       expect(field("customer", fieldName).id).toEqual(id);
     });
   };
-  const itSaveExistingWhenSubmitted = (value) => {
+  const itSaveExistingWhenSubmitted = (fieldName, value) => {
     //submitting
     it("save exisiting when submitted", async () => {
       expect.hasAssertions();
       render(
         <CustomerForm
-          firstName={value}
-          onSubmit={({ firstName }) => expect(firstName).toEqual(value)}
+          {...{ [fieldName]: value }}
+          onSubmit={(props) => expect(props[fieldName]).toEqual(value)}
         />
       );
 
       await act(async () => ReactTestUtils.Simulate.submit(form("customer")));
     });
   };
-  const itSavesNewWhenSubmitted = (value, newValue) => {
+  const itSavesNewWhenSubmitted = (fieldName, value) => {
     it("saves new when submitted", async () => {
       expect.hasAssertions();
 
       render(
         <CustomerForm
-          firstName={value}
-          onSubmit={({ firstName }) => expect(firstName).toEqual(newValue)}
+          {...{ [fieldName]: "existing value" }}
+          onSubmit={(props) => expect(props[fieldName]).toEqual(value)}
         />
       );
-      const firstName = field("customer", "firstName");
+      const firstName = field("customer", fieldName);
       await act(async () => {
         ReactTestUtils.Simulate.change(firstName, {
-          target: { value: newValue, name: "firstName" },
+          target: { value: value, name: fieldName },
         });
       });
       await act(async () => ReactTestUtils.Simulate.submit(form("customer")));
@@ -86,8 +86,8 @@ describe("CustomerForm", () => {
     itIncludesTheExistingValue("firstName", "Ashley");
     itRendersLabel("firstName", "First name");
     itAssignId("firstName", "firstName");
-    itSaveExistingWhenSubmitted("Ashley");
-    itSavesNewWhenSubmitted("Ashley", "Jamie");
+    itSaveExistingWhenSubmitted("firstName", "Ashley");
+    itSavesNewWhenSubmitted("firstName", "Jamie");
   });
   describe("last name field", () => {});
   describe("phone number field", () => {});
