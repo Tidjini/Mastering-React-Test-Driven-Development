@@ -122,7 +122,7 @@ describe("CustomerForm", () => {
     const selectableServices = ["Cut", "Blow-dry"];
     render(<AppointmentForm selectableServices={selectableServices} />);
 
-    const optionNodes = Array.from(field("service").childNodes);
+    const optionNodes = Array.from(field("appointment", "service").childNodes);
     const renderedServices = optionNodes.map((node) => node.textContent);
     expect(renderedServices).toEqual(
       expect.arrayContaining(selectableServices)
