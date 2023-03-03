@@ -77,11 +77,11 @@ describe("CustomerForm", () => {
       await act(async () => ReactTestUtils.Simulate.submit(form("customer")));
     });
   };
+  it("renders a form", () => {
+    render(<CustomerForm />);
+    expect(form("customer")).not.toBeNull();
+  });
   describe("test name field", () => {
-    it("renders a form", () => {
-      render(<CustomerForm />);
-      expect(form("customer")).not.toBeNull();
-    });
     itRendersAsATextBox("firstName");
     itIncludesTheExistingValue("firstName", "Ashley");
     itRendersLabel("firstName", "First name");
@@ -104,5 +104,10 @@ describe("CustomerForm", () => {
     itAssignId("phoneNumber", "phoneNumber");
     itSaveExistingWhenSubmitted("phoneNumber", "(132) 555-0123");
     itSavesNewWhenSubmitted("phoneNumber", "(132) 555-0124");
+  });
+  it("has a submit button", () => {
+    render(<CustomerForm />);
+    const submitButton = container.querySelector('input[type="submit"]');
+    expect(submitButton).not.toBeNull();
   });
 });
