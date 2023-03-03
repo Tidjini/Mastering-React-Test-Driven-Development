@@ -89,6 +89,13 @@ describe("CustomerForm", () => {
     itSaveExistingWhenSubmitted("firstName", "Ashley");
     itSavesNewWhenSubmitted("firstName", "Jamie");
   });
-  describe("last name field", () => {});
+  describe("last name field", () => {
+    itRendersAsATextBox("lastName");
+    itIncludesTheExistingValue("lastName", "Ashley");
+    itRendersLabel("lastName", "First name");
+    itAssignId("lastName", "lastName");
+    itSaveExistingWhenSubmitted("lastName", "Ashley");
+    itSavesNewWhenSubmitted("lastName", "Jamie");
+  });
   describe("phone number field", () => {});
 });
