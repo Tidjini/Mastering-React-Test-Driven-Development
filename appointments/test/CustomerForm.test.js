@@ -30,6 +30,13 @@ describe("CustomerForm", () => {
     });
   };
 
+  const itRendersLabel = (fieldName, label) => {
+    it("renders label", () => {
+      render(<CustomerForm />);
+      expect(labelFor(fieldName)).not.toBeNull();
+      expect(labelFor(fieldName).textContent).toEqual(label);
+    });
+  };
   describe("test name field", () => {
     it("renders a form", () => {
       render(<CustomerForm />);
@@ -37,12 +44,7 @@ describe("CustomerForm", () => {
     });
     itRendersAsATextBox("firstName");
     itIncludesTheExistingValue("firstName", "Ashley");
-
-    it("renders label", () => {
-      render(<CustomerForm />);
-      expect(labelFor("firstName")).not.toBeNull();
-      expect(labelFor("firstName").textContent).toEqual("First name");
-    });
+    itRendersLabel("firstName", "First name");
     it("assign an id that matches the label id", () => {
       render(<CustomerForm />);
       expect(field("customer", "firstName").id).toEqual("firstName");
