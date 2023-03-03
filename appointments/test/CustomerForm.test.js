@@ -92,7 +92,7 @@ describe("CustomerForm", () => {
   describe("last name field", () => {
     itRendersAsATextBox("lastName");
     itIncludesTheExistingValue("lastName", "Ashley");
-    itRendersLabel("lastName", "First name");
+    itRendersLabel("lastName", "Last name");
     itAssignId("lastName", "lastName");
     itSaveExistingWhenSubmitted("lastName", "Ashley");
     itSavesNewWhenSubmitted("lastName", "Jamie");
