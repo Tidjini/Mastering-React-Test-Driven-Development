@@ -17,33 +17,36 @@ describe("CustomerForm", () => {
     expect(formElement.tagName).toEqual("INPUT");
     expect(formElement.type).toEqual("text");
   };
+  const itRendersAsATextBox = (fieldName) => {
+    it("renders a textbox", () => {
+      render(<CustomerForm />);
+      expectToBeInputFieldOfTypeText(field("customer", fieldName));
+    });
+  };
 
   describe("test name field", () => {
     it("renders a form", () => {
       render(<CustomerForm />);
       expect(form("customer")).not.toBeNull();
     });
-    it("renders the first name field as a textbox", () => {
-      render(<CustomerForm />);
-      expectToBeInputFieldOfTypeText(field("customer", "firstName"));
-    });
+    itRendersAsATextBox("firstName");
 
-    it("includes the existing value for the first name", () => {
+    it("includes the existing value", () => {
       render(<CustomerForm firstName="Ashley" />);
       expect(field("customer", "firstName").value).toEqual("Ashley");
     });
-    it("renders label for the first name", () => {
+    it("renders label", () => {
       render(<CustomerForm />);
       expect(labelFor("firstName")).not.toBeNull();
       expect(labelFor("firstName").textContent).toEqual("First name");
     });
-    it("assign an id that matches the label id to the first name field", () => {
+    it("assign an id that matches the label id", () => {
       render(<CustomerForm />);
       expect(field("customer", "firstName").id).toEqual("firstName");
     });
 
     //submitting
-    it("save exisiting first name when submitted", async () => {
+    it("save exisiting when submitted", async () => {
       expect.hasAssertions();
       render(
         <CustomerForm
@@ -55,7 +58,7 @@ describe("CustomerForm", () => {
       await act(async () => ReactTestUtils.Simulate.submit(form("customer")));
     });
 
-    it("saves new first name when submitted", async () => {
+    it("saves new when submitted", async () => {
       expect.hasAssertions();
 
       render(
