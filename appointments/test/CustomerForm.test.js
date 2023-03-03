@@ -25,7 +25,7 @@ describe("CustomerForm", () => {
   };
   const itIncludesTheExistingValue = (fieldName, value) => {
     it("includes the existing value", () => {
-      render(<CustomerForm firstName={value} />);
+      render(<CustomerForm {...{ [fieldName]: value }} />);
       expect(field("customer", fieldName).value).toEqual(value);
     });
   };
@@ -68,9 +68,9 @@ describe("CustomerForm", () => {
           onSubmit={(props) => expect(props[fieldName]).toEqual(value)}
         />
       );
-      const firstName = field("customer", fieldName);
+
       await act(async () => {
-        ReactTestUtils.Simulate.change(firstName, {
+        ReactTestUtils.Simulate.change(field("customer", fieldName), {
           target: { value: value, name: fieldName },
         });
       });
@@ -94,7 +94,7 @@ describe("CustomerForm", () => {
     itIncludesTheExistingValue("lastName", "Ashley");
     itRendersLabel("lastName", "Last name");
     itAssignId("lastName", "lastName");
-    itSaveExistingWhenSubmitted("lastName", "Ashley");
+    itSaveExistingWhenSubmitted("lastName", "Ashley-");
     itSavesNewWhenSubmitted("lastName", "Jamie");
   });
   describe("phone number field", () => {});

@@ -1,7 +1,7 @@
 import React from "react";
 
 export const CustomerForm = ({ firstName, lastName, onSubmit }) => {
-  const [customer, setCustomer] = React.useState({ firstName });
+  const [customer, setCustomer] = React.useState({ firstName, lastName });
   const handleChangeForm = ({ target }) => {
     const { name, value } = target;
     setCustomer((customer) => ({ ...customer, [name]: value }));
@@ -19,7 +19,7 @@ export const CustomerForm = ({ firstName, lastName, onSubmit }) => {
           type="text"
           name="firstName"
           id="firstName"
-          value={firstName}
+          value={customer.firstName}
           onChange={handleChangeForm}
         />
       </label>
@@ -29,7 +29,7 @@ export const CustomerForm = ({ firstName, lastName, onSubmit }) => {
           type="text"
           name="lastName"
           id="lastName"
-          value={lastName}
+          value={customer.lastName}
           onChange={handleChangeForm}
         />
       </label>
