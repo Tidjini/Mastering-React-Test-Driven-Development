@@ -97,5 +97,12 @@ describe("CustomerForm", () => {
     itSaveExistingWhenSubmitted("lastName", "Ashley-");
     itSavesNewWhenSubmitted("lastName", "Jamie");
   });
-  describe("phone number field", () => {});
+  describe("phone number field", () => {
+    itRendersAsATextBox("phoneNumber");
+    itIncludesTheExistingValue("phoneNumber", "(132) 555-0123");
+    itRendersLabel("phoneNumber", "Last name");
+    itAssignId("phoneNumber", "phoneNumber");
+    itSaveExistingWhenSubmitted("phoneNumber", "(132) 555-0123");
+    itSavesNewWhenSubmitted("phoneNumber", "(132) 555-0124");
+  });
 });
