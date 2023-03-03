@@ -1,6 +1,6 @@
 import React from "react";
 import { createContainer } from "./domManipulators";
-import { CustomerForm } from "../src/CustomerForm";
+import { AppointmentForm, CustomerForm } from "../src/CustomerForm";
 import ReactTestUtils, { act } from "react-dom/test-utils";
 
 describe("CustomerForm", () => {
@@ -109,5 +109,12 @@ describe("CustomerForm", () => {
     render(<CustomerForm />);
     const submitButton = container.querySelector('input[type="submit"]');
     expect(submitButton).not.toBeNull();
+  });
+
+  it("initially has a blank values chosen", () => {
+    render(<AppointmentForm />);
+    const firstNode = field("appointment", "service").childNodes[0];
+    expect(firstNode.value).toEqual("");
+    expect(firstNode.selected).toBeTruthy();
   });
 });
