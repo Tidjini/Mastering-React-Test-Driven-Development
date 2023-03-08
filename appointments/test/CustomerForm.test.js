@@ -205,7 +205,7 @@ describe("Appointment Form", () => {
 
   describe("test name field", () => {
     itRendersLabel("service", "Service");
-    // itAssignId("firstName", "firstName");
+    itAssignId("service", "service");
     // itSaveExistingWhenSubmitted("firstName", "Ashley");
     // itSavesNewWhenSubmitted("firstName", "Jamie");
   });
