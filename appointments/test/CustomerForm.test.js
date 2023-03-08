@@ -161,9 +161,11 @@ describe("Appointment Form", () => {
   const itSavesNewWhenSubmitted = (fieldName, value) => {
     it("saves new when submitted", async () => {
       expect.hasAssertions();
+      const selectableServices = ["Cut", "Blow-dry"];
 
       render(
         <AppointmentForm
+          selectableServices={selectableServices}
           {...{ [fieldName]: "existing value" }}
           onSubmit={(props) => expect(props[fieldName]).toEqual(value)}
         />
@@ -206,7 +208,7 @@ describe("Appointment Form", () => {
   describe("test name field", () => {
     itRendersLabel("service", "Service");
     itAssignId("service", "service");
-    // itSaveExistingWhenSubmitted("firstName", "Ashley");
+    itSaveExistingWhenSubmitted("service", "Cut");
     // itSavesNewWhenSubmitted("firstName", "Jamie");
   });
   it("pre-selects the existing value", () => {
