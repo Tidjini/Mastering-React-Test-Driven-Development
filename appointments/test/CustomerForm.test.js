@@ -77,6 +77,12 @@ describe("CustomerForm", () => {
       await act(async () => ReactTestUtils.Simulate.submit(form("customer")));
     });
   };
+
+  const findOption = (dropdownNode, textContent) => {
+    const options = Array.from(dropdownNode.childNodes);
+    return options.find((option) => option.textContent === textContent);
+  };
+
   it("renders a form", () => {
     render(<CustomerForm />);
     expect(form("customer")).not.toBeNull();
@@ -127,5 +133,14 @@ describe("CustomerForm", () => {
     expect(renderedServices).toEqual(
       expect.arrayContaining(selectableServices)
     );
+  });
+
+  it("pre-selects the existing value", () => {
+    const services = ["Cut", "Blow-dry"];
+    render(
+      <AppointmentForm selectableServices={services} service="Blow-dry" />
+    );
+    const option = findOption(field("appointment", "service"), "Blow-dry");
+    expect(option.selected).toBeTruthy();
   });
 });
