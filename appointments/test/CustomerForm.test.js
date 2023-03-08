@@ -78,11 +78,6 @@ describe("CustomerForm", () => {
     });
   };
 
-  const findOption = (dropdownNode, textContent) => {
-    const options = Array.from(dropdownNode.childNodes);
-    return options.find((option) => option.textContent === textContent);
-  };
-
   it("renders a form", () => {
     render(<CustomerForm />);
     expect(form("customer")).not.toBeNull();
@@ -116,6 +111,79 @@ describe("CustomerForm", () => {
     const submitButton = container.querySelector('input[type="submit"]');
     expect(submitButton).not.toBeNull();
   });
+});
+
+describe("Appointment Form", () => {
+  let render, container;
+
+  beforeEach(() => {
+    ({ render, container } = createContainer());
+  });
+  const form = (id) => container.querySelector(`form[id=${id}]`);
+  const labelFor = (id) => container.querySelector(`label[for=${id}]`);
+  const field = (formId, fieldName) => form(formId).elements[fieldName];
+  const expectToBeInputFieldOfTypeText = (formElement) => {
+    expect(formElement).not.toBeNull();
+    expect(formElement.tagName).toEqual("INPUT");
+    expect(formElement.type).toEqual("text");
+  };
+
+  const itRendersLabel = (fieldName, label) => {
+    it("renders label", () => {
+      render(<AppointmentForm />);
+      expect(labelFor(fieldName)).not.toBeNull();
+      expect(labelFor(fieldName).textContent).toEqual(label);
+    });
+  };
+
+  const itAssignId = (fieldName, id) => {
+    it("assign an id that matches the label id", () => {
+      render(<AppointmentForm />);
+      expect(field("appointment", fieldName).id).toEqual(id);
+    });
+  };
+  const itSaveExistingWhenSubmitted = (fieldName, value) => {
+    //submitting
+    it("save exisiting when submitted", async () => {
+      expect.hasAssertions();
+      render(
+        <AppointmentForm
+          {...{ [fieldName]: value }}
+          onSubmit={(props) => expect(props[fieldName]).toEqual(value)}
+        />
+      );
+
+      await act(async () =>
+        ReactTestUtils.Simulate.submit(form("appointment"))
+      );
+    });
+  };
+  const itSavesNewWhenSubmitted = (fieldName, value) => {
+    it("saves new when submitted", async () => {
+      expect.hasAssertions();
+
+      render(
+        <AppointmentForm
+          {...{ [fieldName]: "existing value" }}
+          onSubmit={(props) => expect(props[fieldName]).toEqual(value)}
+        />
+      );
+
+      await act(async () => {
+        ReactTestUtils.Simulate.change(field("appointment", fieldName), {
+          target: { value: value, name: fieldName },
+        });
+      });
+      await act(async () =>
+        ReactTestUtils.Simulate.submit(form("appointment"))
+      );
+    });
+  };
+
+  const findOption = (dropdownNode, textContent) => {
+    const options = Array.from(dropdownNode.childNodes);
+    return options.find((option) => option.textContent === textContent);
+  };
 
   it("initially has a blank values chosen", () => {
     render(<AppointmentForm />);
@@ -135,6 +203,12 @@ describe("CustomerForm", () => {
     );
   });
 
+  describe("test name field", () => {
+    itRendersLabel("service", "Service");
+    // itAssignId("firstName", "firstName");
+    // itSaveExistingWhenSubmitted("firstName", "Ashley");
+    // itSavesNewWhenSubmitted("firstName", "Jamie");
+  });
   it("pre-selects the existing value", () => {
     const services = ["Cut", "Blow-dry"];
     render(
